@@ -1,29 +1,34 @@
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
     [SerializeField] private float moveSpeed = 0.5f;
     private Controls controls;
     private Vector2 moveInput;
     private Rigidbody2D rb;
-    
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         controls = new Controls();
-
     }
-    private void OnEnable()
+
+    public override void OnNetworkSpawn()
     {
+        if (!IsOwner) return;
+
         controls.PlayerMap.Enable();
 
         controls.PlayerMap.Move.performed += OnMove;
         controls.PlayerMap.Move.canceled += OnMoveCancelled;
     }
 
-    private void OnDisable()
+    public override void OnNetworkDespawn()
     {
+        if (!IsOwner) return;
+
         controls.PlayerMap.Move.performed -= OnMove;
         controls.PlayerMap.Move.canceled -= OnMoveCancelled;
 
@@ -41,6 +46,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!IsOwner) return;
+
         rb.linearVelocity = moveInput * moveSpeed;
     }
 }
