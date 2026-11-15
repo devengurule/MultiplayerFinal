@@ -1,6 +1,6 @@
 {
     "version": 1,
-    "name": "BasicPlayerControls",
+    "name": "Controls",
     "maps": [
         {
             "name": "PlayerMap",

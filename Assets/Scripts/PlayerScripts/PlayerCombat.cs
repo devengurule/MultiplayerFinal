@@ -3,12 +3,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerCombat : MonoBehaviour
 {
-
-    private BasicPlayerControls controls;
+    private Controls controls;
 
     void Awake()
     {
-        controls = new BasicPlayerControls();
+        controls = new Controls();
     }
 
     void OnEnable()

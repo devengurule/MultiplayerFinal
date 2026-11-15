@@ -3,31 +3,40 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-
-    private BasicPlayerControls controls;
+    [SerializeField] private float moveSpeed = 0.5f;
+    private Controls controls;
     private Vector2 moveInput;
-    Rigidbody2D rb;
-
-    public float moveSpeed = 5.0f;
+    private Rigidbody2D rb;
     
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        controls = new BasicPlayerControls();
+        controls = new Controls();
 
     }
     private void OnEnable()
     {
         controls.PlayerMap.Enable();
 
-        controls.PlayerMap.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
-        controls.PlayerMap.Move.canceled += ctx => moveInput = Vector2.zero;
-
+        controls.PlayerMap.Move.performed += OnMove;
+        controls.PlayerMap.Move.canceled += OnMoveCancelled;
     }
 
     private void OnDisable()
     {
+        controls.PlayerMap.Move.performed -= OnMove;
+        controls.PlayerMap.Move.canceled -= OnMoveCancelled;
+
         controls.PlayerMap.Disable();
+    }
+
+    private void OnMove(InputAction.CallbackContext context)
+    {
+        moveInput = context.ReadValue<Vector2>();
+    }
+    private void OnMoveCancelled(InputAction.CallbackContext context)
+    {
+        moveInput = Vector2.zero;
     }
 
     private void FixedUpdate()
