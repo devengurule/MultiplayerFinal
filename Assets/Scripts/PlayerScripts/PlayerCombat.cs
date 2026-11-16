@@ -28,13 +28,13 @@ public class PlayerCombat : MonoBehaviour
 
     private void OnPlaceBombPerformed(InputAction.CallbackContext context)
     {
-        Debug.Log("Bomb Placed!");
+        //Debug.Log("Bomb Placed!");
         //TODO: Bomb Placing Logic
     }
 
     private void OnThrowBombPerformed(InputAction.CallbackContext context)
     {
-        Debug.Log("Bomb Thrown!");
+        //Debug.Log("Bomb Thrown!");
         //TODO: Bomb Throwing Logic
     }
 }

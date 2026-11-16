@@ -4,14 +4,24 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance { get; private set; }
+
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private TMP_InputField roomCodeInput;
-
     private string roomCode => roomCodeInput.text;
-
     private ConnectionManager session;
+    private LobbyManager lobbyManager;
 
-    private GameObject player;
+    private void Awake()
+    {
+        if (instance != null && instance == this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        instance = this;
+    }
 
     private void Start()
     {
@@ -20,8 +30,20 @@ public class GameManager : MonoBehaviour
         session.OnSessionJoined += EnterRoom;
         session.OnSessionLeft += SessionLeft;
 
+        LobbyManager.Spawned += OnLobbySpawned;
+
         NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
         NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnected;
+    }
+
+    private void Update()
+    {
+        Debug.Log(lobbyManager == null);
+    }  
+
+    private void OnDestroy()
+    {
+        if (instance == this) instance = null;
     }
 
     public async void Host()
@@ -100,5 +122,10 @@ public class GameManager : MonoBehaviour
         if (!NetworkManager.Singleton.IsServer) return;
 
         Debug.Log($"Client {clientId} disconnected.");
+    }
+
+    public void OnLobbySpawned()
+    {
+        lobbyManager = GetComponent<LobbyManager>();
     }
 }
