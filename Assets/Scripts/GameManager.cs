@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        DontDestroyOnLoad(gameObject);
+
         instance = this;
     }
 
@@ -147,5 +149,10 @@ public class GameManager : MonoBehaviour
         {
             lobbyManager = lm;
         }
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 }
