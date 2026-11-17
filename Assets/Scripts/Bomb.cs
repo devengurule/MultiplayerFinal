@@ -38,6 +38,7 @@ public class Bomb : NetworkBehaviour
         {
             Vector2 knockBackDirection = (col.gameObject.transform.position - transform.position).normalized;
             col.gameObject.GetComponent<PlayerMovement>().ApplyKnockbackRpc(knockBackDirection, knockbackForce);
+            col.gameObject.GetComponent<HPController>().TakeDamageRpc(damage);
         }
     }
 

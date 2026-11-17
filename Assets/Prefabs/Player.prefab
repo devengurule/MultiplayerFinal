@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 5530326013647864534}
   - component: {fileID: 6255683894134418897}
   - component: {fileID: 7892153076141805371}
-  - component: {fileID: 971159552696591275}
+  - component: {fileID: 5947230153190115827}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 3757775172
+  GlobalObjectIdHash: 3102267183
   InScenePlacedSourceGlobalObjectIdHash: 0
   m_InScenePlacedDisabledByDefault: 0
   DeferredDespawnTick: 0
@@ -303,7 +303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChangeColor
   ShowTopMostFoldoutHeaderGroup: 1
---- !u!114 &971159552696591275
+--- !u!114 &5947230153190115827
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -312,6 +312,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 897935853393925392}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a04947b6d7acc5e4f97600969cf0cc2f, type: 3}
+  m_Script: {fileID: 11500000, guid: 267e49948e6813d40ad8403eedaddd93, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CollisionManager
+  m_EditorClassIdentifier: Assembly-CSharp::HealthManager
+  MaxHp: 5
