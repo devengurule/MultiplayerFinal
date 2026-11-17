@@ -315,4 +315,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 267e49948e6813d40ad8403eedaddd93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthManager
+  ShowTopMostFoldoutHeaderGroup: 1
   MaxHp: 5

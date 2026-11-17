@@ -25,6 +25,8 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (!IsOwner) return;
 
+        SetCameraTarget(gameObject);
+
         controls.PlayerMap.Enable();
 
         controls.PlayerMap.Move.performed += OnMove;
@@ -54,5 +56,13 @@ public class PlayerMovement : NetworkBehaviour
     public void ApplyKnockbackRpc(Vector3 direction, float knockbackForce)
     {
         rb.AddForce(direction * knockbackForce, ForceMode2D.Impulse);
+    }
+
+    private void SetCameraTarget(GameObject target)
+    {
+        if (Camera.main.gameObject.GetComponent<FollowTarget>() != null)
+        {
+            Camera.main.gameObject.GetComponent<FollowTarget>().SetTarget(target);
+        }
     }
 }
