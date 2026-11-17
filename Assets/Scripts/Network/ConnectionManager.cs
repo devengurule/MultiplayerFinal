@@ -9,8 +9,6 @@ using UnityEngine;
 public class ConnectionManager : MonoBehaviour
 {
     public static ConnectionManager instance {  get; private set; }
-
-    private const int MAX_PLAYERS = 20;
     public event Action OnSessionJoined;
     public event Action OnSessionLeft;
 
@@ -19,6 +17,7 @@ public class ConnectionManager : MonoBehaviour
     private Task initalizationTask;
     public ISession CurrentSession { get; private set; }
     private bool isBusy;
+    private const int MAX_PLAYERS = 20;
 
     private void Awake()
     {
@@ -53,6 +52,7 @@ public class ConnectionManager : MonoBehaviour
             var options = new SessionOptions
             {
                 MaxPlayers = MAX_PLAYERS,
+                //MaxPlayers = GameSettings.MAX_PLAYERS,
                 IsPrivate = true
             }.WithRelayNetwork();
 

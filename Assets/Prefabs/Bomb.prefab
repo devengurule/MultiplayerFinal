@@ -10,7 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 296216786650237080}
   - component: {fileID: 5642138531251956246}
+  - component: {fileID: 305122427851340480}
   - component: {fileID: 3951705273870878216}
+  - component: {fileID: 4441026394187529580}
   m_Layer: 0
   m_Name: Bomb
   m_TagString: Untagged
@@ -62,6 +64,33 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &305122427851340480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330977677116165889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+  GlobalObjectIdHash: 2569248361
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  m_InScenePlacedDisabledByDefault: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  m_InScenePlaced: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 0
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!114 &3951705273870878216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,6 +104,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   rotateSpeed: 10
+--- !u!114 &4441026394187529580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330977677116165889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476550828f58e6641b6f0dabbaff0468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  ShowTopMostFoldoutHeaderGroup: 1
+  <damage>k__BackingField: 0
+  <knockbackForce>k__BackingField: 0
+  <aoeRadius>k__BackingField: 0
 --- !u!1 &6575769464805639065
 GameObject:
   m_ObjectHideFlags: 0

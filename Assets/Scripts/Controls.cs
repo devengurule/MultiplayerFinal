@@ -121,6 +121,16 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""initialStateCheck"": false,
                     ""priority"": 0
+                },
+                {
+                    ""name"": ""ActivateBombs"",
+                    ""type"": ""Button"",
+                    ""id"": ""7bb26232-199d-4750-b026-45e27024e986"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false,
+                    ""priority"": 0
                 }
             ],
             ""bindings"": [
@@ -200,6 +210,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Throw Bomb"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6ac65794-a5e1-4195-84b7-1995a64ff754"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";PlayerScheme"",
+                    ""action"": ""ActivateBombs"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -217,6 +238,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_PlayerMap_Move = m_PlayerMap.FindAction("Move", throwIfNotFound: true);
         m_PlayerMap_PlaceBomb = m_PlayerMap.FindAction("Place Bomb", throwIfNotFound: true);
         m_PlayerMap_ThrowBomb = m_PlayerMap.FindAction("Throw Bomb", throwIfNotFound: true);
+        m_PlayerMap_ActivateBombs = m_PlayerMap.FindAction("ActivateBombs", throwIfNotFound: true);
     }
 
     ~@Controls()
@@ -300,6 +322,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMap_Move;
     private readonly InputAction m_PlayerMap_PlaceBomb;
     private readonly InputAction m_PlayerMap_ThrowBomb;
+    private readonly InputAction m_PlayerMap_ActivateBombs;
     /// <summary>
     /// Provides access to input actions defined in input action map "PlayerMap".
     /// </summary>
@@ -323,6 +346,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "PlayerMap/ThrowBomb".
         /// </summary>
         public InputAction @ThrowBomb => m_Wrapper.m_PlayerMap_ThrowBomb;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerMap/ActivateBombs".
+        /// </summary>
+        public InputAction @ActivateBombs => m_Wrapper.m_PlayerMap_ActivateBombs;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -358,6 +385,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @ThrowBomb.started += instance.OnThrowBomb;
             @ThrowBomb.performed += instance.OnThrowBomb;
             @ThrowBomb.canceled += instance.OnThrowBomb;
+            @ActivateBombs.started += instance.OnActivateBombs;
+            @ActivateBombs.performed += instance.OnActivateBombs;
+            @ActivateBombs.canceled += instance.OnActivateBombs;
         }
 
         /// <summary>
@@ -378,6 +408,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @ThrowBomb.started -= instance.OnThrowBomb;
             @ThrowBomb.performed -= instance.OnThrowBomb;
             @ThrowBomb.canceled -= instance.OnThrowBomb;
+            @ActivateBombs.started -= instance.OnActivateBombs;
+            @ActivateBombs.performed -= instance.OnActivateBombs;
+            @ActivateBombs.canceled -= instance.OnActivateBombs;
         }
 
         /// <summary>
@@ -452,5 +485,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnThrowBomb(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ActivateBombs" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnActivateBombs(InputAction.CallbackContext context);
     }
 }

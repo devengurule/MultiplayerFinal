@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null && instance == this)
+        if (instance != null && instance != this)
         {
             Destroy(gameObject);
             return;
@@ -38,12 +38,29 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(lobbyManager == null);
+        //Debug.Log(lobbyManager == null);
     }  
 
     private void OnDestroy()
     {
         if (instance == this) instance = null;
+
+        if (session != null)
+        {
+            session.OnSessionJoined -= EnterRoom;
+            session.OnSessionLeft -= SessionLeft;
+        }
+
+        if (NetworkManager.Singleton != null)
+        {
+            NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
+            NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientDisconnected;
+        }
+
+        if (lobbyManager != null)
+        {
+            LobbyManager.Spawned -= OnLobbySpawned;
+        }
     }
 
     public async void Host()
@@ -124,8 +141,11 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Client {clientId} disconnected.");
     }
 
-    public void OnLobbySpawned()
+    public void OnLobbySpawned(LobbyManager lm)
     {
-        lobbyManager = GetComponent<LobbyManager>();
+        if (lobbyManager == null)
+        {
+            lobbyManager = lm;
+        }
     }
 }

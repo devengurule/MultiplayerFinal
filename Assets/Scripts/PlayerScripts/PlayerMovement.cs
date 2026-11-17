@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : NetworkBehaviour
 {
-    [SerializeField] private float moveSpeed = 0.5f;
+    [SerializeField] private float moveSpeed;
     private Controls controls;
     private Vector2 moveInput;
     private Rigidbody2D rb;
@@ -13,6 +13,12 @@ public class PlayerMovement : NetworkBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         controls = new Controls();
+    }
+    private void FixedUpdate()
+    {
+        if (!IsOwner) return;
+
+        rb.AddForce(moveInput * moveSpeed, ForceMode2D.Force);
     }
 
     public override void OnNetworkSpawn()
@@ -44,10 +50,9 @@ public class PlayerMovement : NetworkBehaviour
         moveInput = Vector2.zero;
     }
 
-    private void FixedUpdate()
+    [Rpc(SendTo.Owner)]
+    public void ApplyKnockbackRpc(Vector3 direction, float knockbackForce)
     {
-        if (!IsOwner) return;
-
-        rb.linearVelocity = moveInput * moveSpeed;
+        rb.AddForce(direction * knockbackForce, ForceMode2D.Impulse);
     }
 }

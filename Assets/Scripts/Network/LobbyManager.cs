@@ -6,19 +6,16 @@ using UnityEngine;
 public class LobbyManager : NetworkBehaviour
 {
     public NetworkList<PlayerData> Players;
-    public static event Action Spawned;
-    private GameManager gm;
+    public static event Action<LobbyManager> Spawned;
 
     private void Awake()
     {
         Players = new NetworkList<PlayerData>();
-        gm = GameManager.instance;
     }
 
     public override void OnNetworkSpawn()
     {
-        Spawned?.Invoke();
-        gm.OnLobbySpawned();
+        Spawned?.Invoke(this);
         // Only the server needs to know when players connect and disconnect
         // This prevents clients from creating their own list of connected players
         if (IsServer)

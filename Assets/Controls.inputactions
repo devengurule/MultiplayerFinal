@@ -35,6 +35,16 @@
                     "interactions": "",
                     "initialStateCheck": false,
                     "priority": 0
+                },
+                {
+                    "name": "ActivateBombs",
+                    "type": "Button",
+                    "id": "7bb26232-199d-4750-b026-45e27024e986",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
                 }
             ],
             "bindings": [
@@ -112,6 +122,17 @@
                     "processors": "",
                     "groups": ";PlayerScheme",
                     "action": "Throw Bomb",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6ac65794-a5e1-4195-84b7-1995a64ff754",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";PlayerScheme",
+                    "action": "ActivateBombs",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
