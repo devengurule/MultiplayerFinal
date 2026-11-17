@@ -108,6 +108,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Entered Room");
     }
+
     private void SessionLeft()
     {
         Debug.Log("Leaving");
@@ -148,6 +149,14 @@ public class GameManager : MonoBehaviour
         if (lobbyManager == null)
         {
             lobbyManager = lm;
+        }
+    }
+
+    private void SetCameraTarget(GameObject target)
+    {
+        if (Camera.main.gameObject.GetComponent<FollowTarget>() != null)
+        {
+            Camera.main.gameObject.GetComponent<FollowTarget>().SetTarget(target);
         }
     }
 
