@@ -2,18 +2,29 @@ using UnityEngine;
 using Unity.Netcode;
 
 // Tracks player objects
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : NetworkBehaviour
 {
     [SerializeField] private System.Collections.Generic.Dictionary<ulong, PlayerInfo> players = new();
 
     private void Awake()
     {
-        
+        PlayerInfo.PlayerObjectSpawned += OnPlayerSpawned;
+        PlayerInfo.PlayerObjectDestroyed += OnPlayerDestroyed;
+        NetworkManager.Singleton.OnClientDisconnectCallback += OnPlayerDisconnect;
+    }
+
+    public override void OnDestroy()
+    {
+        base.OnDestroy();
+
+        PlayerInfo.PlayerObjectSpawned -= OnPlayerSpawned;
+        PlayerInfo.PlayerObjectDestroyed -= OnPlayerDestroyed;
+        NetworkManager.Singleton.OnClientDisconnectCallback -= OnPlayerDisconnect;
     }
 
     private void OnPlayerSpawned(PlayerInfo player, ulong ownerID)
     {
-
+        AddPlayer(player, ownerID);
     }
 
     private void AddPlayer(PlayerInfo player, ulong ownerID)
@@ -36,7 +47,7 @@ public class PlayerManager : MonoBehaviour
         if (players.ContainsKey(ownerID)) players[ownerID] = null;
     }
 
-    private void OnPlayerDespawned(PlayerInfo _, ulong ownerID)
+    private void OnPlayerDisconnect(ulong ownerID)
     {
         if (players.ContainsKey(ownerID)) players.Remove(ownerID);
     }
